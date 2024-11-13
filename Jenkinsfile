@@ -1,3 +1,4 @@
+// declaritve pipline
 // pipeline{
 //     agent{
 //         label 'aws-agent'
@@ -35,22 +36,44 @@
 //         }
 //     }
 // }
-node{
-    git branch: 'main', url: 'https://github.com/DinaGamalMahmoud/simple-java-app.git'
+// scripted pipline:
+// node{
+//     git branch: 'main', url: 'https://github.com/DinaGamalMahmoud/simple-java-app.git'
 
-    stage('build'){
-        try{
-        sh'echo "build Stage"'
+//     stage('build'){
+//         try{
+//         sh'echo "build Stage"'
+//         }
+//         catch(Exception e){
+//             sh'echo "exception found"'
+//             throw e
+//         }
+//     }
+//     stage('test'){
+//         if (env.BRANCH_NAME== "feat"){
+//             sh'echo "test Stage"'
+//         }
+//     }
+// }
+// successfull test 
+// declaritive pipline
+pipeline {
+    agent any 
+
+    stages {
+        stage('build') {
+            steps {
+                script {
+                    echo "build in progress"
+                }
+            }
         }
-        catch(Exception e){
-            sh'echo "exception found"'
-            throw e
-        }
-    }
-    stage('test'){
-        if (env.BRANCH_NAME== "feat"){
-            sh'echo "test Stage"'
+        stage('test') {
+            steps {
+                script {
+                    echo "test in progress"
+                }
+            }
         }
     }
 }
-// successfull test 
